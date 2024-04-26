@@ -1,0 +1,4 @@
+temporalio
+haystack-ai
+uvicorn
+fastapi
