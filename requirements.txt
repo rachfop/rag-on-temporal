@@ -2,3 +2,4 @@ temporalio
 haystack-ai
 uvicorn
 fastapi
+openai

@@ -30,7 +30,7 @@ This project demonstrates how to run a RAG (Retrieval-Augmented Generation) base
 4. Export your OpenAI key:
 
     ```bash
-    export OPENAI_API_KEY=<your-key>
+    export OPENAI_API_KEY=<your-api-key>
     ```
 
 ## Running the Application
@@ -58,17 +58,23 @@ This project demonstrates how to run a RAG (Retrieval-Augmented Generation) base
 To send a request to the RAG workflow, use the following command:
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"question": "Who lives in Berlin?"}' http://localhost:8000/query
+curl -X POST "http://localhost:8000/query" -H "Content-Type: application/json" -d '{"question": "Who lives in Rome?"}'
 ```
 
 Replace `"Who lives in Berlin?"` with your desired question.
+
+The response is as followed:
+
+```command
+{"answer":"Giorgio lives in Rome."}
+```
 
 ## Terminating the Workflow
 
 To terminate a running workflow, use the following command:
 
 ```bash
-temporal workflow terminate --workflow-id <workflow-id>
+temporal workflow terminate --workflow-id="<workflow-id>"
 ```
 
 Replace `<workflow-id>` with the ID of the workflow you want to terminate.

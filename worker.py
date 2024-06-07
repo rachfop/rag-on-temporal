@@ -1,32 +1,22 @@
-# worker.py
 import asyncio
 
 from temporalio.client import Client
 from temporalio.worker import Worker
 
-from activities import (create_document_store, create_llm,
-                        create_prompt_builder, create_rag_pipeline,
-                        create_retriever, run_query, PipelineEncodingPayloadConverter)
+from activities import create_document_store, run_query
 from workflow import QueryWorkflow
 
 interrupt_event = asyncio.Event()
 
 
-async def main():
-    client = await Client.connect(
-        "localhost:7233",
-        data_converter=PipelineEncodingPayloadConverter,
-    )
+async def main() -> None:
+    client = await Client.connect("localhost:7233")
     worker = Worker(
         client,
         task_queue="rag-task-queue",
         workflows=[QueryWorkflow],
         activities=[
             create_document_store,
-            create_retriever,
-            create_prompt_builder,
-            create_llm,
-            create_rag_pipeline,
             run_query,
         ],
     )
